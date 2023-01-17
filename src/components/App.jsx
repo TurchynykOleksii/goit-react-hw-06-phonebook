@@ -42,8 +42,6 @@ export const App = () => {
     );
   };
 
-  console.log(1);
-
   return (
     <div className="app">
       <h1>Phonebook</h1>
