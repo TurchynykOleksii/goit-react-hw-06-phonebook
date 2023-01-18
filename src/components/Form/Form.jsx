@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { addContact } from 'redux/contactSlice';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
 import css from './Form.module.css';
 import { PropTypes } from 'prop-types';
 
@@ -9,8 +10,7 @@ export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
-  const userId = nanoid();
+  const contacts = useSelector(selectContacts);
 
   const handelInputChange = e => {
     const { name, value } = e.target;
@@ -28,7 +28,7 @@ export const Form = () => {
     if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
       return alert(`We already have ${name}`);
     }
-    dispatch(addContact({ name: name, number: number, id: userId }));
+    dispatch(addContact({ name: name, number: number, id: nanoid() }));
     reset();
   };
 
